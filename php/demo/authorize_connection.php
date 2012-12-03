@@ -2,7 +2,7 @@
 // Here's a sample application.
 
 // To change api server... uses api.matchmove.com if this is ignored.
-// define('KUNGFU_DOMAIN', 'beta8.api.matchmove.com');
+define('KUNGFU_DOMAIN', 'api.matchmove.com');
 
 // include the appkungfu initialize
 require '../init.php';
@@ -18,7 +18,7 @@ require 'html.php';
 $mmad = new Kungfu('www.matchmove.com');
 
 // check if an auth token is stored or if url contains a signed request from matchmove
-if (!$mmad->connect->initialize() && empty($_GET))
+if (!$mmad->connect->initialize() && empty($_GET['state']))
 {
     // oh. no auth token was found. request authorization.
     $mmad->connect->authorize();
@@ -41,12 +41,13 @@ $users = $mmad->read('users');
  * @param $api string  api to call
  * @param $data array  data to be passed.
  **/
-$comment = $mmad->create('users/feeds/status',
+/*
+ $comment = $mmad->create('users/feeds/status',
     array(
         'to_id' => '333333',
         'message' => 'Hello! this is coming from Kungfu SDK.'
     ));
-
+*/
 
 //this is how you perform an update or PUT request
 /**
@@ -69,17 +70,19 @@ $details = $mmad->update('api',
  * @param $api string  api to call
  * @param $data array  data to be passed.
  **/
+/**
 $details = $mmad->delete('users/friends/requests',
     array(
         'friend_id' => '222222'
     ));
-
+*/
 // now output the results! :)
 echo '<h3>Read User</h3>';
 html::table($users);
-
+/**
 echo '<h3>Post status feed to self</h3>';
 html::table($comment);
 
 echo '<h3>Reject a friend request!</h3>';
 html::table($details);
+*/
